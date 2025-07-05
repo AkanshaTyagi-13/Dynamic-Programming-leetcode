@@ -1,0 +1,24 @@
+class Solution {
+    public int robber(int[] nums,int s, int e){
+        int prev=nums[s];
+        int prev2=0;
+        for(int i=s+1;i<e;i++){
+            int take=nums[i];
+            if(i>s+1) take+=prev2;
+            int notTake=0+prev;
+            int curri=Math.max(take,notTake);
+            prev2=prev;
+            prev=curri;
+        }
+        return prev;
+    }
+    public int rob(int[] nums) {
+        int n=nums.length;
+        if(n==1){
+            return nums[0];
+        }
+        int temp1=robber(nums,0,n-1);
+        int temp2=robber(nums,1,n);
+        return Math.max(temp1,temp2);
+    }
+}
